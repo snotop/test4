@@ -14,38 +14,36 @@ window.onload = function () {
     showpokemon();
     initMatch();
 }
-function showpokemon(){         
-
-    var div1= document.createElement("div");
-    div1.className= "aping";                          
-    var div2=document.createElement("div");
-    div2.className="option-wrapper";
-    document.getElementsByTagName('body')[0].appendChild("div1");
-    div1.appendChild("div2");
-    var div3=document.createElement("div");
-    div3.className="pimg";
-    div3.id="p[i]";
-    div2.appendChild("div3");
-    var pokoimg = document.createElement("img");
-    pokoimg.setAttribute("src");
-    pokoimg.className="golimg";
-    div3.appendChild("pokoimg");
-    var pika=document.createElement("img");
-    pika.setAttribute("src");
-    pika.src="img/pikachu.svg";
-    pika.className="aimg --upper";
-    pika.id="aimg[i]";
-    div3.appendChild("pika");
-
-
-
-
-    
-    
-    
+function showpokemon() {
+    for (i = 0; i < person; i++) {
+        var div1 = document.createElement("div");
+        div1.className = "aping";
+        var div2 = document.createElement("div");
+        div2.className = "option-wrapper";
+        document.getElementsByTagName('body')[0].appendChild("div1");
+        div1.appendChild("div2");
+        var div3 = document.createElement("div");
+        div3.className = "pimg";
+        div3.id = "p[i]";
+        div2.appendChild("div3");
+        var pokoimg = document.createElement("img");
+        pokoimg.setAttribute("src");
+        pokoimg.className = "golimg";
+        div3.appendChild("pokoimg");
+        var pika = document.createElement("img");
+        pika.setAttribute("src");
+        pika.src = "img/pikachu.svg";
+        pika.className = "aimg --upper";
+        pika.id = "aimg[i]";
+        div3.appendChild("pika");
+        var minus = document.createElement("img");
+        minus.setAttribute("src");
+        minus.className = "underimg";
+        minus.src = "img/minus-symbol.svg";
+        div2.appendChild("minus");
+    }
 }
 function initMatch() {
-
     imagelist = document.getElementsByClassName("aimg");
     x = document.getElementsByClassName("golimg");
     u = document.getElementsByClassName("underimg");
