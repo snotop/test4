@@ -1,0 +1,58 @@
+img{
+    width: 100px;
+    height: 100px;
+    
+}
+body{
+    width:100%;
+    height:100%;
+    background-color: blueviolet;
+}
+
+.golimg{
+    top:38px;
+    left:25px;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index:1;
+}
+.option-wrapper{
+    position:absolute;
+    transition: all 0.2s ease-in;
+}
+
+.pimg{
+    top:10px;
+    left:10px;
+    width: 100px;
+    height: 100px;
+}
+.aimg.--upper{
+    transform: translateY(-73px);
+    transition:all 0.3s ease;
+   
+
+}
+.aimg{
+    z-index:2;
+    position:absolute;
+    transition:all 1s ease;
+}
+.underimg{
+    position:absolute;
+    /* width: 200px; */
+    height: 50px;
+    display: none;
+   
+}
+.apimg{
+    display:flex;
+    flex-direction:column;
+    
+}
+
+
+.aimg.hide{
+    opacity: 0;
+}
