@@ -1,59 +1,74 @@
-var person = prompt("number vared benama");
+
 var u, x, imagelist;
 var isFirstTime = true;
 var optionDomList;
+var optioncount;
 
 var startonce = true;
-var golIndex = Math.floor(Math.random() * (4 - 1)) + 1;
-var positions = [
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 }
-]
+var golIndex ;
+var positions = [];
 window.onload = function () {
-    showpokemon();
     initMatch();
+
 }
-function showpokemon() {
-    for (i = 0; i < person; i++) {
-        var div1 = document.createElement("div");
-        div1.className = "aping";
-        var div2 = document.createElement("div");
-        div2.className = "option-wrapper";
-        document.getElementsByTagName('body')[0].appendChild(div1);
-        div1.appendChild(div2);
-        var div3 = document.createElement("div");
-        div3.className = "pimg";
-        div3.id = "p[i]";
-        div2.appendChild(div3);
+function showpokemon(optioncount) {
+    for (i = 1; i <= optioncount; i++) {
+        var pikaimg = document.createElement("img");
+        pikaimg.setAttribute("src", "");
+        pikaimg.src = "img/pikachu.svg";
+        pikaimg.className = "aimg --upper";
+        pikaimg.id = "aimg" + i;
+
         var pokoimg = document.createElement("img");
-        pokoimg.setAttribute("src","");
+        pokoimg.setAttribute("src", "");
         pokoimg.className = "golimg";
-        div3.appendChild(pokoimg);
-        var pika = document.createElement("img");
-        pika.setAttribute("src","");
-        pika.src = "img/pikachu.svg";
-        pika.className = "aimg --upper";
-        pika.id = "aimg[i]";
-        div3.appendChild(pika);
-        var minus = document.createElement("img");
-        minus.setAttribute("src","");
-        minus.className = "underimg";
-        minus.src = "img/minus-symbol.svg";
-        div2.appendChild(minus);
+
+        var underimg = document.createElement("img");
+        underimg.setAttribute("src", "");
+        underimg.className = "underimg";
+        underimg.src = "img/minus-symbol.svg";
+
+        var pg = document.createElement("div");
+        pg.className = "pimg";
+        pg.id = "p" + i;
+
+        var ow = document.createElement("div");
+        ow.className = "option-wrapper";
+
+        var optionwrapper = document.createElement("div");
+        optionwrapper.className = "aping";
+        pg.appendChild(pikaimg);
+        pg.appendChild(pokoimg);
+        ow.appendChild(underimg);
+        ow.appendChild(pg);
+        optionwrapper.appendChild(ow);
+        document.body.appendChild(optionwrapper);
+
+
+
+
+
+
+
     }
+
 }
 function initMatch() {
+     optioncount = prompt("number vared benama");
+    showpokemon(optioncount);
     imagelist = document.getElementsByClassName("aimg");
     x = document.getElementsByClassName("golimg");
     u = document.getElementsByClassName("underimg");
     optionDomList = document.getElementsByClassName("option-wrapper");
-    initResult();
-    setPosition();
+    golIndex = Math.floor(Math.random()*optioncount) + 1;
+    
+    initResult(golIndex,optioncount);
+    setPosition(optioncount);
+
 }
 
-function initResult() {
-    for (let i = 0; i < 3; i++) {
+function initResult(golIndex,optioncount) {
+    for (let i = 0; i < optioncount; i++) {
         if (golIndex - 1 == i) {
             x[golIndex - 1].src = "img/pokeball.svg";
         }
@@ -105,25 +120,36 @@ function gameStart() {
 
 
 }
-function swap() {
-    var img1 = document.getElementById("p1");
-    var img2 = document.getElementById("p2");
-}
-function setPosition() {
+
+function setPosition(optioncount) {
     var height = document.body.clientHeight;
     var width = document.body.clientWidth;
-    positions[0].x = (width / 2) - 300;
-    positions[0].y = (height / 2) - 50;
-    optionDomList[0].style.top = positions[0].y + "px";
-    optionDomList[0].style.left = positions[0].x + "px";
-    positions[1].x = (width / 2) - 50;
-    positions[1].y = (height / 2) - 50;
-    optionDomList[1].style.top = positions[1].y + "px";
-    optionDomList[1].style.left = positions[1].x + "px";
-    positions[2].x = (width / 2) + 200;
-    positions[2].y = (height / 2) - 50;
-    optionDomList[2].style.top = positions[2].y + "px";
-    optionDomList[2].style.left = positions[2].x + "px";
+   
+    var newwidth = width / optioncount;
+
+    for (i = 0; i < optioncount; i++) {
+        positions[i]={};
+        positions[i].x = newwidth;
+        positions[i].y = (height / 2) - 50;
+        optionDomList[i].style.top = positions[i].y + "px";
+        optionDomList[i].style.left = positions[i].x + "px";
+        newwidth=newwidth+200;
+
+    }
+
+
+    // positions[0].x = (width / 2) - 300;
+    // positions[0].y = (height / 2) - 50;
+    // optionDomList[0].style.top = positions[0].y + "px";
+    // optionDomList[0].style.left = positions[0].x + "px";
+    // positions[1].x = (width / 2) - 50;
+    // positions[1].y = (height / 2) - 50;
+    // optionDomList[1].style.top = positions[1].y + "px";
+    // optionDomList[1].style.left = positions[1].x + "px";
+    // positions[2].x = (width / 2) + 200;
+    // positions[2].y = (height / 2) - 50;
+    // optionDomList[2].style.top = positions[2].y + "px";
+    // optionDomList[2].style.left = positions[2].x + "px";
 }
 function swap(index1, index2, ) {
 
