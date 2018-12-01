@@ -104,16 +104,22 @@ function showResult(clickedItemIndex) {
             u[2].style.display = "block";
         // u[2].classList.add("show");
     }
-    document.getElementById("aimg1").classList.add("--upper");
-    document.getElementById("aimg2").classList.add("--upper");
-    document.getElementById("aimg3").classList.add("--upper");
+    for(i=1;i<=optioncount;i++){
+        document.getElementById("aimg"+i).classList.add("--upper");
+    }
+    
+    // document.getElementById("aimg2").classList.add("--upper");
+    // document.getElementById("aimg3").classList.add("--upper");
 }
 function gameStart() {
 
     if (startonce) {
-        document.getElementById("aimg1").classList.remove("--upper");
-        document.getElementById("aimg2").classList.remove("--upper");
-        document.getElementById("aimg3").classList.remove("--upper");
+        for(i=1;i<=optioncount;i++){
+            document.getElementById("aimg"+i).classList.remove("--upper");
+        }
+       
+        // document.getElementById("aimg2").classList.remove("--upper");
+        // document.getElementById("aimg3").classList.remove("--upper");
         jabeja();
         startonce = false;
     }
@@ -155,9 +161,9 @@ function swap(index1, index2, ) {
 
     var distance = positions[index2].x - positions[index1].x;
     optionDomList[index1].style.top = positions[index2].y + 100 + "px";
-    optionDomList[index1].style.left = positions[index2].x - 125 + "px";
+    optionDomList[index1].style.left = positions[index2].x - 62 + "px";
     optionDomList[index2].style.top = positions[index1].y - 100 + "px";
-    optionDomList[index2].style.left = positions[index1].x + 130 + "px";
+    optionDomList[index2].style.left = positions[index1].x + 65 + "px";
     setTimeout(function () {
 
         optionDomList[index1].style.top = positions[index2].y + "px";
@@ -179,21 +185,19 @@ function jabeja() {
     var i = 0;
     var interval = setInterval(function () {
         console.log(i);
-        var poko = Math.floor(Math.random() * (4 - 1)) + 1;
-        switch (poko) {
-            case 0:
-                setTimeout(function () { swap(1, 2) }, 500);
-                break;
-            case 1:
-                setTimeout(function () { swap(0, 2) }, 500);
-                break;
-            case 2:
-                setTimeout(function () { swap(0, 1) }, 500);
+        var poko = Math.floor(Math.random()*optioncount) + 1;
+        var poko2=Math.floor(Math.random()*optioncount) + 1;
+        if(poko!=poko2){
+            setTimeout(function () { swap(poko, poko2) }, 500);
         }
-
+        else{
+            poko = Math.floor(Math.random()*optioncount) + 1;
+            poko2=Math.floor(Math.random()*optioncount) + 1;
+        }
+        
         i++;
 
-        if (i == 5) {
+        if (i == 14) {
             clearInterval(interval);
 
             setTimeout(function () {
