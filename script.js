@@ -3,9 +3,8 @@ var u, x, imagelist;
 var isFirstTime = true;
 var optionDomList;
 var optioncount;
-
 var startonce = true;
-var golIndex ;
+var golIndex;
 var positions = [];
 window.onload = function () {
     initMatch();
@@ -43,31 +42,25 @@ function showpokemon(optioncount) {
         ow.appendChild(pg);
         optionwrapper.appendChild(ow);
         document.body.appendChild(optionwrapper);
-
-
-
-
-
-
-
     }
 
 }
 function initMatch() {
-     optioncount = prompt("number vared benama");
+    optioncount = prompt("number vared benama");
     showpokemon(optioncount);
     imagelist = document.getElementsByClassName("aimg");
     x = document.getElementsByClassName("golimg");
     u = document.getElementsByClassName("underimg");
     optionDomList = document.getElementsByClassName("option-wrapper");
-    golIndex = Math.floor(Math.random()*optioncount) + 1;
-    
-    initResult(golIndex,optioncount);
+    golIndex = Math.floor(Math.random() * optioncount) + 1;
+   
+    initResult(golIndex, optioncount);
     setPosition(optioncount);
 
 }
 
-function initResult(golIndex,optioncount) {
+function initResult(golIndex, optioncount) {
+    
     for (let i = 0; i < optioncount; i++) {
         if (golIndex - 1 == i) {
             x[golIndex - 1].src = "img/pokeball.svg";
@@ -75,22 +68,24 @@ function initResult(golIndex,optioncount) {
         else {
             x[i].src = "img/fist.svg";
         }
+
+    }
+}
+function afterJabeja() {
+    for (let i = 0; i < optioncount; i++) {
         imagelist[i].addEventListener("click", function (event) {
-            if (faal, isFirstTime) {
-                jabeja(i);
-                faal = true;
+
+            if (isFirstTime) {
                 showResult(i);
                 isFirstTime = false;
             }
-
-
-
         })
     }
+
 }
 
 function showResult(clickedItemIndex) {
-
+  
     switch (clickedItemIndex) {
         case 0:
             u[0].style.display = "block";
@@ -104,20 +99,21 @@ function showResult(clickedItemIndex) {
             u[2].style.display = "block";
         // u[2].classList.add("show");
     }
-    for(i=1;i<=optioncount;i++){
-        document.getElementById("aimg"+i).classList.add("--upper");
+    for (i = 1; i <= optioncount; i++) {
+        document.getElementById("aimg" + i).classList.add("--upper");
     }
-    
+
     // document.getElementById("aimg2").classList.add("--upper");
     // document.getElementById("aimg3").classList.add("--upper");
 }
 function gameStart() {
 
     if (startonce) {
-        for(i=1;i<=optioncount;i++){
-            document.getElementById("aimg"+i).classList.remove("--upper");
+
+        for (i = 1; i <= optioncount; i++) {
+            document.getElementById("aimg" + i).classList.remove("--upper");
         }
-       
+
         // document.getElementById("aimg2").classList.remove("--upper");
         // document.getElementById("aimg3").classList.remove("--upper");
         jabeja();
@@ -130,34 +126,22 @@ function gameStart() {
 function setPosition(optioncount) {
     var height = document.body.clientHeight;
     var width = document.body.clientWidth;
-   
+
     var newwidth = width / optioncount;
 
     for (i = 0; i < optioncount; i++) {
-        positions[i]={};
+        positions[i] = {};
         positions[i].x = newwidth;
         positions[i].y = (height / 2) - 50;
         optionDomList[i].style.top = positions[i].y + "px";
         optionDomList[i].style.left = positions[i].x + "px";
-        newwidth=newwidth+200;
+        newwidth = newwidth + 200;
 
     }
 
-
-    // positions[0].x = (width / 2) - 300;
-    // positions[0].y = (height / 2) - 50;
-    // optionDomList[0].style.top = positions[0].y + "px";
-    // optionDomList[0].style.left = positions[0].x + "px";
-    // positions[1].x = (width / 2) - 50;
-    // positions[1].y = (height / 2) - 50;
-    // optionDomList[1].style.top = positions[1].y + "px";
-    // optionDomList[1].style.left = positions[1].x + "px";
-    // positions[2].x = (width / 2) + 200;
-    // positions[2].y = (height / 2) - 50;
-    // optionDomList[2].style.top = positions[2].y + "px";
-    // optionDomList[2].style.left = positions[2].x + "px";
 }
-function swap(index1, index2, ) {
+function swap(index1, index2) {
+
 
     var distance = positions[index2].x - positions[index1].x;
     optionDomList[index1].style.top = positions[index2].y + 100 + "px";
@@ -185,23 +169,26 @@ function jabeja() {
     var i = 0;
     var interval = setInterval(function () {
         console.log(i);
-        var poko = Math.floor(Math.random()*optioncount) + 1;
-        var poko2=Math.floor(Math.random()*optioncount) + 1;
-        if(poko!=poko2){
-            setTimeout(function () { swap(poko, poko2) }, 500);
+        var flag = true;
+        while (flag) {
+            var poko = Math.floor(Math.random() * optioncount);
+            var poko2 = Math.floor(Math.random() * optioncount);
+            if (poko != poko2) {
+                flag = false;
+            }
         }
-        else{
-            poko = Math.floor(Math.random()*optioncount) + 1;
-            poko2=Math.floor(Math.random()*optioncount) + 1;
-        }
-        
+
+
+        setTimeout(function () { swap(poko, poko2) }, 500);
+
+
         i++;
 
         if (i == 14) {
             clearInterval(interval);
 
             setTimeout(function () {
-                alert("goool");
+                afterJabeja();
 
             }, 1000);
         }
